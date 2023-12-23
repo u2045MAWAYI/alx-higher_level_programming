@@ -2,19 +2,26 @@
 
 /**
  * check_cycle - checks if a singly linked list has a cycle
- * @list: pointer to the head of the linked list
+ * @list: pointer to the beginnig of the linked list
  * Return: 0 if there is no cycle, 1 if there is a cycle
  */
 
 int check_cycle(listint_t *list)
 {
-	listint_t *current = list;
+	listint_t *current, *check;
 
-	while (current != NULL)
+	if (list == NULL || list->next == NULL)
+		return (0);
+	current = list;
+	check = current->next;
+
+	while (current != NULL && check->next != NULL
+		&& check->next->next != NULL)
 	{
-		current = current->next;
-		if (current == list)
+		if (current == check)
 			return (1);
+		current = current->next;
+		check = check->next->next;
 	}
 	return (0);
 }
