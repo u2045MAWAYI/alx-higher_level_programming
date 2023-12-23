@@ -1,20 +1,28 @@
 #include "lists.h"
-
 /**
- * check_cycle - checks if a list is circular
- * @list: points to the beginning  node
- * Return: 1 if list is circular or 0 if linear
+ * check_cycle - check if linked list is cyclic
+ * @list: the linked list
+ * Return: 0 on False and 1 if true
  */
-
 int check_cycle(listint_t *list)
 {
 	listint_t *current = list;
 
-	while (current != NULL)
+	if (current->next != NULL)
 	{
 		current = current->next;
-		if (current == list)
-			return (1);
 	}
-	return (0);
+	else
+	{
+		return (0);
+	}
+	while (current != list)
+	{
+		if (current->next == NULL)
+		{
+			return (0);
+		}
+		current = current->next;
+	}
+	return (1);
 }
