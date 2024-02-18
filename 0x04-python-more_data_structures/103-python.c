@@ -1,14 +1,11 @@
 #include <Python.h>
-#include <object.h>
-#include <listobject.h>
-#include <bytesobject.h>
 
 void print_python_list(PyObject *p) {
     Py_ssize_t size, i;
     PyObject *item;
 
     if (!PyList_Check(p)) {
-        printf("  [ERROR] Invalid List Object\n");
+        printf("[ERROR] Invalid List Object\n");
         return;
     }
 
@@ -26,27 +23,24 @@ void print_python_list(PyObject *p) {
 void print_python_bytes(PyObject *p) {
     Py_ssize_t size, i;
     unsigned char *bytes;
-    PyObject *repr;
 
     if (!PyBytes_Check(p)) {
-        printf("  [ERROR] Invalid Bytes Object\n");
+        printf("[ERROR] Invalid Bytes Object\n");
         return;
     }
 
     size = PyBytes_Size(p);
-    printf("[.] bytes object info\n");
-    printf("  [ERROR] Invalid Bytes Object\n");
+    printf("[*] bytes object info\n");
     printf("[*] Size: %ld\n", size);
     printf("[*] Trying string: %s\n", PyBytes_AS_STRING(p));
 
     if (size > 10)
         size = 10;
     else
-        printf("  [ERROR] Invalid Bytes Object\n");
-
-    bytes = (unsigned char *)PyBytes_AS_STRING(p);
+        printf("[ERROR] Invalid Bytes Object\n");
 
     printf("[*] first %ld bytes: ", size);
+    bytes = (unsigned char *)PyBytes_AS_STRING(p);
     for (i = 0; i < size; ++i) {
         printf("%02x", bytes[i]);
         if (i < size - 1)
